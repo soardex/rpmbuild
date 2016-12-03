@@ -224,7 +224,7 @@ Patch3014: vim-manpagefixes-948566.patch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: python-devel ncurses-devel gettext perl-devel
 BuildRequires: perl(ExtUtils::Embed) perl(ExtUtils::ParseXS)
-BuildRequires: libacl-devel gpm-devel autoconf
+BuildRequires: libacl-devel gpm-devel autoconf lua-devel
 %if %{WITH_SELINUX}
 BuildRequires: libselinux-devel
 %endif
@@ -548,12 +548,13 @@ export CXXFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_FORTIFY_SOU
 %configure --with-features=huge \
   --enable-pythoninterp=dynamic \
   --enable-perlinterp \
+  --enable-luainterp \
   --disable-tclinterp --with-x=yes \
   --enable-xim --enable-multibyte \
   --with-tlib=ncurses \
   --enable-gtk2-check --enable-gui=gtk2 \
-  --with-compiledby="<bugzilla@redhat.com>" --enable-cscope \
-  --with-modified-by="<bugzilla@redhat.com>" \
+  --with-compiledby="<eabucay@vastorigins.net>" --enable-cscope \
+  --with-modified-by="<eabucay@vastorigins.net>" \
 %if "%{withnetbeans}" == "1"
   --enable-netbeans \
 %else
@@ -578,11 +579,12 @@ make clean
  --enable-pythoninterp=dynamic \
  --enable-perlinterp \
  --disable-tclinterp \
+ --enable-luainterp \
  --with-x=no \
  --enable-gui=no --exec-prefix=%{_prefix} --enable-multibyte \
- --enable-cscope --with-modified-by="<bugzilla@redhat.com>" \
+ --enable-cscope --with-modified-by="<eabucay@vastorigins.net>" \
  --with-tlib=ncurses \
- --with-compiledby="<bugzilla@redhat.com>" \
+ --with-compiledby="<eabucay@vastorigins.net>" \
 %if "%{withnetbeans}" == "1"
   --enable-netbeans \
 %else
@@ -615,8 +617,8 @@ perl -pi -e "s/\/etc\/vimrc/\/etc\/virc/"  os_unix.h
 %endif
   --disable-pythoninterp --disable-perlinterp --disable-tclinterp \
   --with-tlib=ncurses --enable-gui=no --disable-gpm --exec-prefix=/ \
-  --with-compiledby="<bugzilla@redhat.com>" \
-  --with-modified-by="<bugzilla@redhat.com>"
+  --with-compiledby="<eabucay@vastorigins.net>" \
+  --with-modified-by="<eabucay@vastorigins.net>"
 
 make VIMRCLOC=/etc VIMRUNTIMEDIR=/usr/share/vim/%{vimdir} %{?_smp_mflags}
 
